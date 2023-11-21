@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../components/button";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -49,13 +50,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="text-center">
-                        <button
-                            type="button"
-                            className="bg-background text-primary px-8 py-2 rounded-2xl hover:text-background hover:bg-primary border-primary border-2"
-                            onClick={handleLogin}
-                        >
-                            Log In
-                        </button>
+                        <Button onClick={handleLogin}>Log In</Button>
                     </div>
                 </form>
             </div>

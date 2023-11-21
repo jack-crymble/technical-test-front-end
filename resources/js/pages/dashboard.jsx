@@ -14,6 +14,7 @@ import {
 } from "../store/features/core-api";
 import Loader from "../components/loader";
 import Error from "./error";
+import Button from "../components/button";
 
 export default function Dashboard() {
     const {
@@ -136,14 +137,13 @@ export default function Dashboard() {
                                     ))}
                             </tbody>
                         </table>
-
-                        <button
-                            className="bg-secondary hover:bg-primary text-primary hover:text-background rounded-2xl px-8 py-2 float-right border-primary border-2"
+                        <Button
+                            className="float-right"
                             onClick={handleNavigationClick}
                         >
                             <span className="pr-2">Inspect</span>
                             <FontAwesomeIcon icon={faArrowRight} />
-                        </button>
+                        </Button>
                     </div>
                 </div>
 
