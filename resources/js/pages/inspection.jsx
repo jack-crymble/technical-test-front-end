@@ -15,6 +15,7 @@ import { useSearchParams } from "react-router-dom";
 import Error from "./error";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCow } from "@fortawesome/free-solid-svg-icons";
+import Card from "../components/card";
 
 export default function InspectionPage() {
     const [searchParams] = useSearchParams();
@@ -179,16 +180,14 @@ export default function InspectionPage() {
 
     return (
         <div className="grid grid-cols-5 gap-4 h-full">
-            <h2 className="flex gap-2 items-center text-xl tracking-widest text-text col-span-5">
+            <h2 className="flex gap-2 items-center text-xl tracking-widest col-span-5">
                 <FontAwesomeIcon icon={faCow} />
                 <span>Farm: {farmId}</span>
             </h2>
             <div className="flex flex-col gap-4 col-span-3 overflow-hidden">
                 <div className="grid grid-cols-9 gap-4">
-                    <div className="bg-secondary text-text rounded-xl col-span-3 flex flex-col gap-2 py-4 items-center justify-center">
-                        <label htmlFor="turbines" className="">
-                            Choose a turbine
-                        </label>
+                    <Card className="flex flex-col gap-2 col-span-3 py-4 items-center justify-center">
+                        <label htmlFor="turbines">Choose a turbine</label>
 
                         <select
                             className=" bg-primary text-secondary p-2 rounded-lg text-center"
@@ -204,28 +203,28 @@ export default function InspectionPage() {
                                 </option>
                             ))}
                         </select>
-                    </div>
-                    <div className="bg-secondary text-text rounded-xl col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
+                    </Card>
+                    <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
                         <p>Average Rotor Grade</p>
                         <p className="text-4xl">
                             {calculateComponentGradeAverage("Rotor")}
                         </p>
-                    </div>
-                    <div className="bg-secondary text-text rounded-xl col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
+                    </Card>
+                    <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
                         <p>Average Blade Grade</p>
                         <p className="text-4xl">
                             {calculateComponentGradeAverage("Blade")}
                         </p>
-                    </div>
-                    <div className="bg-secondary text-text rounded-xl col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
+                    </Card>
+                    <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
                         <p>Average Hub Grade</p>
                         <p className="text-4xl">
                             {calculateComponentGradeAverage("Hub")}
                         </p>
-                    </div>
+                    </Card>
                 </div>
-                <div className="bg-secondary rounded-xl flex-grow overflow-scroll">
-                    <table className=" table-fixed mt-8 text-center text-text mx-4 w-[calc(100%-2rem)]">
+                <Card className="flex-grow overflow-scroll">
+                    <table className="table-fixed mt-8 text-center text-text mx-4 w-[calc(100%-2rem)]">
                         <thead>
                             <tr>
                                 <th className="pb-4">Turbine Name</th>
@@ -250,23 +249,28 @@ export default function InspectionPage() {
                             ))}
                         </tbody>
                     </table>
-                </div>
+                </Card>
             </div>
-            <Canvas className="bg-secondary rounded-xl col-span-2">
-                <OrbitControls
-                    enableZoom={false}
-                    minPolarAngle={Math.PI / 2}
-                    maxPolarAngle={Math.PI / 2}
-                    zoom={-10}
-                />
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[2, 5, 2]} intensity={1} />
-                <Suspense fallback={<Loader />}>
-                    <mesh scale={[0.3, 0.3, 0.3]}>
-                        <primitive object={gltf.scene} position={[0, -10, 0]} />
-                    </mesh>
-                </Suspense>
-            </Canvas>
+            <Card className="col-span-2">
+                <Canvas>
+                    <OrbitControls
+                        enableZoom={false}
+                        minPolarAngle={Math.PI / 2}
+                        maxPolarAngle={Math.PI / 2}
+                        zoom={-10}
+                    />
+                    <ambientLight intensity={0.5} />
+                    <directionalLight position={[2, 5, 2]} intensity={1} />
+                    <Suspense fallback={<Loader />}>
+                        <mesh scale={[0.3, 0.3, 0.3]}>
+                            <primitive
+                                object={gltf.scene}
+                                position={[0, -10, 0]}
+                            />
+                        </mesh>
+                    </Suspense>
+                </Canvas>
+            </Card>
         </div>
     );
 }

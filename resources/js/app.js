@@ -12,7 +12,7 @@ export default function App() {
         <>
             <BrowserRouter>
                 <Header />
-                <main className="flex flex-col p-8 bg-background h-[calc(100vh-88px)] overflow-auto">
+                <main className="flex flex-col p-8 bg-background text-text h-[calc(100vh-88px)] overflow-auto">
                     <Routes>
                         <Route
                             path="/"
