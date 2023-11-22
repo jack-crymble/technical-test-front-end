@@ -31,8 +31,8 @@ export default function Map({ turbines }) {
                 <Marker
                     key={index}
                     position={{
-                        lat: +turbine.lat,
-                        lng: +turbine.lng,
+                        lat: parseInt(turbine.lat),
+                        lng: parseInt(turbine.lng),
                     }}
                     icon={customMarker}
                     onClick={() => onMarkerClick(turbine)}
