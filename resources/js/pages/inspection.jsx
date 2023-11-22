@@ -16,6 +16,7 @@ import Error from "./error";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCow } from "@fortawesome/free-solid-svg-icons";
 import Card from "../components/card";
+import Dropdown from "../components/dropdown";
 
 export default function InspectionPage() {
     const [searchParams] = useSearchParams();
@@ -142,14 +143,15 @@ export default function InspectionPage() {
         );
     };
 
-    const onDropdownChange = (turbineID) => {
-        if (turbineID === "all") {
+    const onDropdownChange = (optionId) => {
+        const turbineId = parseInt(optionId);
+        if (turbineId === -1) {
             setFilteredTurbineData(turbineData);
             return;
         }
 
         const filteredTurbines = turbineData.filter(
-            (row) => row.id === +turbineID
+            (row) => row.id === turbineId
         );
         setFilteredTurbineData(filteredTurbines);
     };
@@ -187,22 +189,11 @@ export default function InspectionPage() {
             <div className="flex flex-col gap-4 col-span-3 overflow-hidden">
                 <div className="grid grid-cols-9 gap-4">
                     <Card className="flex flex-col gap-2 col-span-3 py-4 items-center justify-center">
-                        <label htmlFor="turbines">Choose a turbine</label>
-
-                        <select
-                            className=" bg-primary text-secondary p-2 rounded-lg text-center"
-                            name="turbines"
-                            onChange={(event) =>
-                                onDropdownChange(event.target.value)
-                            }
-                        >
-                            <option value="all">All turbines</option>
-                            {turbines.map((turbine) => (
-                                <option value={turbine.id} key={turbine.id}>
-                                    {turbine.name}
-                                </option>
-                            ))}
-                        </select>
+                        <Dropdown
+                            options={turbines}
+                            label="Choose a turbine"
+                            onChange={onDropdownChange}
+                        />
                     </Card>
                     <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
                         <p>Average Rotor Grade</p>
