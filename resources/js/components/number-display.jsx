@@ -1,24 +1,25 @@
+import { average, sum } from "../utils/aggregate.utils";
 import Error from "./error";
-import NumberDisplayAverage from "./number-display-average";
 
 export default function NumberDisplay({
     title,
     aggregate = "avg",
     values = [],
 }) {
-    let componentToRender;
+    let aggregateValue;
 
     switch (aggregate) {
         case "avg":
-            componentToRender = <NumberDisplayAverage values={values} />;
+            aggregateValue = average(values);
             break;
         case "sum":
-            // Can be added in future
-            // componentToRender = <NumberDisplaySum values={values} />;
+            aggregateValue = sum(values);
             break;
         case "min":
-            // Can be added in future
-            // componentToRender = <NumberDisplayMin values={values} />;
+            aggregateValue = Math.min(values);
+            break;
+        case "max":
+            aggregateValue = Math.max(values);
             break;
         default:
             console.error(`Unable to calculate ${aggregate} of ${values}`);
@@ -28,7 +29,7 @@ export default function NumberDisplay({
     return (
         <>
             <p>{title}</p>
-            {componentToRender}
+            <p className="text-4xl">{aggregateValue}</p>
         </>
     );
 }
