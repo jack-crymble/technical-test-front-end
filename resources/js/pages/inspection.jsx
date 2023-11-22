@@ -12,7 +12,7 @@ import {
 } from "../store/features/core-api";
 import Loader from "../components/loader";
 import { useSearchParams } from "react-router-dom";
-import Error from "./error";
+import Error from "../components/error";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCow } from "@fortawesome/free-solid-svg-icons";
 import Card from "../components/card";
@@ -153,7 +153,7 @@ export default function InspectionPage() {
         isGradesLoading ||
         isGradeTypesLoading
     ) {
-        return <Loader></Loader>;
+        return <Loader />;
     }
 
     if (
@@ -164,7 +164,7 @@ export default function InspectionPage() {
         isGradesError ||
         isGradeTypesError
     ) {
-        return <Error></Error>;
+        return <Error />;
     }
 
     return (

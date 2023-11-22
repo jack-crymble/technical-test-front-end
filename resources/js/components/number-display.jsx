@@ -1,4 +1,4 @@
-import Error from "../pages/error";
+import Error from "./error";
 import NumberDisplayAverage from "./number-display-average";
 
 export default function NumberDisplay({

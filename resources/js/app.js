@@ -2,10 +2,10 @@ import { createRoot } from "react-dom/client";
 import Header from "./components/header";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import InspectionPage from "./pages/inspection";
-import Dashboard from "./pages/dashboard";
+import DashboardPage from "./pages/dashboard";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import Login from "./pages/login";
+import LoginPage from "./pages/login";
 
 export default function App() {
     return (
@@ -25,14 +25,14 @@ export default function App() {
                         <Route
                             exact
                             path="/dashboard"
-                            element={<Dashboard />}
+                            element={<DashboardPage />}
                         />
                         <Route
                             exact
                             path="/inspection"
                             element={<InspectionPage />}
                         />
-                        <Route exact path="/login" element={<Login />} />
+                        <Route exact path="/login" element={<LoginPage />} />
                     </Routes>
                 </main>
             </BrowserRouter>

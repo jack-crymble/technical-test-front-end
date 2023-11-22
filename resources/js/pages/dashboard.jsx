@@ -13,14 +13,14 @@ import {
     useGetTurbinesQuery,
 } from "../store/features/core-api";
 import Loader from "../components/loader";
-import Error from "./error";
+import Error from "../components/error";
 import Button from "../components/button";
 import Card from "../components/card";
 import Table from "../components/table";
 import TableHeader from "../components/table-header";
 import TableBody from "../components/table-body";
 
-export default function Dashboard() {
+export default function DashboardPage() {
     const {
         data: farms,
         isError: isFarmsError,

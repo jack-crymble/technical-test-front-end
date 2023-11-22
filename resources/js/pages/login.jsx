@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/button";
 
-const Login = () => {
+export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -56,6 +56,4 @@ const Login = () => {
             </div>
         </div>
     );
-};
-
-export default Login;
+}
