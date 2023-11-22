@@ -1,6 +1,6 @@
-export default function Error() {
+export default function Error({ className }) {
     return (
-        <div>
+        <div className={`${className}`}>
             <p>Oops... Something went wrong</p>
         </div>
     );
