@@ -16,6 +16,9 @@ import Loader from "../components/loader";
 import Error from "./error";
 import Button from "../components/button";
 import Card from "../components/card";
+import Table from "../components/table";
+import TableHeader from "../components/table-header";
+import TableBody from "../components/table-body";
 
 export default function Dashboard() {
     const {
@@ -96,44 +99,29 @@ export default function Dashboard() {
                         <span>Turbines</span>
                     </h2>
                     <Card className="flex-grow p-4">
-                        <table className="table-fixed my-8 mx-4 text-center text-text w-[calc(100%-2rem)]">
-                            <thead>
-                                <tr>
-                                    <th className="text-lg pb-4">Farm name</th>
-                                    <th className="text-lg pb-4">
-                                        Turbine name
-                                    </th>
-                                    <th className="text-lg pb-4">Latitude</th>
-                                    <th className="text-lg pb-4">Longitude</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {turbines
+                        <Table className="mb-8">
+                            <TableHeader
+                                headers={[
+                                    "Farm name",
+                                    "Turbine name",
+                                    "Latitude",
+                                    "Longitude",
+                                ]}
+                            />
+                            <TableBody
+                                rows={turbines
                                     .filter(
                                         (turbine) =>
                                             turbine.farm_id === activeFarm?.id
                                     )
-                                    .map((turbine, index) => (
-                                        <tr
-                                            key={index}
-                                            className=" hover:bg-primary hover:text-background"
-                                        >
-                                            <td className="pb-4">
-                                                {activeFarm.name}
-                                            </td>
-                                            <td className="pb-4">
-                                                {turbine.name}
-                                            </td>
-                                            <td className="pb-4">
-                                                {turbine.lat}
-                                            </td>
-                                            <td className="pb-4">
-                                                {turbine.lng}
-                                            </td>
-                                        </tr>
-                                    ))}
-                            </tbody>
-                        </table>
+                                    .map((turbine) => [
+                                        activeFarm.name,
+                                        turbine.name,
+                                        turbine.lat,
+                                        turbine.lng,
+                                    ])}
+                            />
+                        </Table>
                         <Button
                             className="float-right"
                             onClick={handleNavigationClick}

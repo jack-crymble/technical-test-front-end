@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCow } from "@fortawesome/free-solid-svg-icons";
 import Card from "../components/card";
 import Dropdown from "../components/dropdown";
+import Table from "../components/table";
+import TableHeader from "../components/table-header";
+import TableBody from "../components/table-body";
 
 export default function InspectionPage() {
     const [searchParams] = useSearchParams();
@@ -215,31 +218,24 @@ export default function InspectionPage() {
                     </Card>
                 </div>
                 <Card className="flex-grow overflow-scroll">
-                    <table className="table-fixed mt-8 text-center text-text mx-4 w-[calc(100%-2rem)]">
-                        <thead>
-                            <tr>
-                                <th className="pb-4">Turbine Name</th>
-                                <th className="pb-4">Component Name</th>
-                                <th className="pb-4">Inspected At</th>
-                                <th className="pb-4">Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredTurbineData.map((row, index) => (
-                                <tr
-                                    key={index}
-                                    className=" hover:bg-primary hover:text-background"
-                                >
-                                    <td className="pb-2">{row.name}</td>
-                                    <td className="pb-2">
-                                        {row.componentName}
-                                    </td>
-                                    <td className="pb-2">{row.inspected_at}</td>
-                                    <td className="pb-2">{row.grade}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <Table>
+                        <TableHeader
+                            headers={[
+                                "Turbine Name",
+                                "Component Name",
+                                "Inspected At",
+                                "Grade",
+                            ]}
+                        />
+                        <TableBody
+                            rows={filteredTurbineData.map((row) => [
+                                row.name,
+                                row.componentName,
+                                row.inspected_at,
+                                row.grade,
+                            ])}
+                        />
+                    </Table>
                 </Card>
             </div>
             <Card className="col-span-2">
