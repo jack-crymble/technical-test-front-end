@@ -130,23 +130,6 @@ export default function InspectionPage() {
         setFilteredTurbineData(turbineData);
     }, [inspections, gradeTypes, componentTypes, turbines, grades, components]);
 
-    const calculateComponentGradeAverage = (componentName) => {
-        const filteredRows = filteredTurbineData.filter(
-            (row) => row.componentName === componentName
-        );
-        if (filteredRows.length === 0) return 0;
-
-        return (
-            filteredRows
-                .map((row) => row.grade)
-                .reduce(
-                    (previous, current) =>
-                        parseInt(previous) + parseInt(current),
-                    0
-                ) / filteredRows.length
-        );
-    };
-
     const onDropdownChange = (optionId) => {
         const turbineId = parseInt(optionId);
         if (turbineId === -1) {
