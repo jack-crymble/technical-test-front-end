@@ -4,6 +4,10 @@ import "../../css/map.css";
 import Loader from "./loader";
 
 export default function Map({ turbines }) {
+    /**
+     * Valid API Key would be added to env var
+     * and referenced in useLoadScript hook below
+     */
     const { isLoaded } = useLoadScript({});
     const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
 
@@ -14,7 +18,7 @@ export default function Map({ turbines }) {
     };
 
     const onMarkerClick = (turbine) => {
-        console.log("You clicked me", turbine);
+        console.log("You clicked", turbine);
     };
 
     if (!isLoaded) {
