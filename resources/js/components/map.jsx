@@ -14,7 +14,6 @@ export default function Map({ turbines }) {
     };
 
     const onMarkerClick = (turbine) => {
-        // TODO: Replace comment with logic
         console.log("You clicked me", turbine);
     };
 
