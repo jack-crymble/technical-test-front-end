@@ -20,6 +20,7 @@ import Dropdown from "../components/dropdown";
 import Table from "../components/table";
 import TableHeader from "../components/table-header";
 import TableBody from "../components/table-body";
+import NumberDisplay from "../components/number-display";
 
 export default function InspectionPage() {
     const [searchParams] = useSearchParams();
@@ -199,22 +200,28 @@ export default function InspectionPage() {
                         />
                     </Card>
                     <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
-                        <p>Average Rotor Grade</p>
-                        <p className="text-4xl">
-                            {calculateComponentGradeAverage("Rotor")}
-                        </p>
+                        <NumberDisplay
+                            title="Average Rotor Grade"
+                            values={filteredTurbineData
+                                .filter((row) => row.componentName === "Rotor")
+                                .map((row) => row.grade)}
+                        />
                     </Card>
                     <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
-                        <p>Average Blade Grade</p>
-                        <p className="text-4xl">
-                            {calculateComponentGradeAverage("Blade")}
-                        </p>
+                        <NumberDisplay
+                            title="Average Blade Grade"
+                            values={filteredTurbineData
+                                .filter((row) => row.componentName === "Blade")
+                                .map((row) => row.grade)}
+                        />
                     </Card>
                     <Card className="col-span-2 flex flex-col gap-4 py-4 items-center justify-center">
-                        <p>Average Hub Grade</p>
-                        <p className="text-4xl">
-                            {calculateComponentGradeAverage("Hub")}
-                        </p>
+                        <NumberDisplay
+                            title="Average Hub Grade"
+                            values={filteredTurbineData
+                                .filter((row) => row.componentName === "Hub")
+                                .map((row) => row.grade)}
+                        />
                     </Card>
                 </div>
                 <Card className="flex-grow overflow-scroll">
