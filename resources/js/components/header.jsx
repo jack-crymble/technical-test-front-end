@@ -1,14 +1,19 @@
 import { faHome, faUser, faWind } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../store/features/auth-slice";
 
 export default function Header() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const authenticated = useSelector((state) => state.auth.authenticated);
 
     const [userDropdownOpen, setDropdown] = useState(false);
 
-    const handleNavigation = () => navigate("/dashboard");
+    const handleNavigation = (navigateTo) => navigate(navigateTo);
 
     const handleUser = () => {
         setDropdown(!userDropdownOpen);
@@ -18,13 +23,13 @@ export default function Header() {
         <header className="flex justify-between items-center px-8 py-4 bg-secondary">
             <button
                 className="rounded-xl p-4 text-xl bg-secondary text-primary hover:bg-primary hover:text-secondary"
-                onClick={handleNavigation}
+                onClick={() => handleNavigation("/dashboard")}
             >
                 <FontAwesomeIcon icon={faHome} />
             </button>
             <h1
                 className="flex gap-2 items-center text-3xl tracking-widest cursor-pointer text-text"
-                onClick={handleNavigation}
+                onClick={() => handleNavigation("/dashboard")}
             >
                 <span>WindWise</span>
                 <FontAwesomeIcon icon={faWind} />
@@ -44,22 +49,21 @@ export default function Header() {
                             className="py-2 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDefaultButton"
                         >
-                            <li>
-                                <a
-                                    href="#"
+                            {authenticated ? (
+                                <li
                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    onClick={() => dispatch(logout())}
                                 >
-                                    Sign in
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
+                                    Log Out
+                                </li>
+                            ) : (
+                                <li
                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    onClick={() => navigate("/login")}
                                 >
-                                    Settings
-                                </a>
-                            </li>
+                                    Log In
+                                </li>
+                            )}
                         </ul>
                     </div>
                 )}
