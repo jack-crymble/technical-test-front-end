@@ -23,7 +23,7 @@ export default function NumberDisplay({
             break;
         default:
             console.error(`Unable to calculate ${aggregate} of ${values}`);
-            return <Error className="text-center" />;
+            return <Error />;
     }
 
     return (
