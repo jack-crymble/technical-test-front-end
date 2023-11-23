@@ -4,39 +4,57 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import InspectionPage from "./pages/inspection";
 import DashboardPage from "./pages/dashboard";
 import { Provider } from "react-redux";
-import store from "./store/store";
 import LoginPage from "./pages/login";
+import { persistor, store } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import Loader from "./components/loader";
+import AuthenticatedGuard from "./guards/authenticated.guard";
+import UnauthenticatedGuard from "./guards/unauthenticated.guard";
 
 export default function App() {
     return (
-        <>
-            <BrowserRouter>
-                <Header />
-                <main className="flex flex-col p-8 bg-background text-text h-[calc(100vh-88px)] overflow-auto">
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={<Navigate replace to="/login" />}
-                        />
-                        <Route
-                            path="*"
-                            element={<Navigate replace to="/login" />}
-                        />
-                        <Route
-                            exact
-                            path="/dashboard"
-                            element={<DashboardPage />}
-                        />
-                        <Route
-                            exact
-                            path="/inspection"
-                            element={<InspectionPage />}
-                        />
-                        <Route exact path="/login" element={<LoginPage />} />
-                    </Routes>
-                </main>
-            </BrowserRouter>
-        </>
+        <BrowserRouter>
+            <Header />
+            <main className="flex flex-col p-8 bg-background text-text h-[calc(100vh-84px)] overflow-auto">
+                <Routes>
+                    <Route
+                        exact
+                        path="/login"
+                        element={
+                            <UnauthenticatedGuard redirectTo="/dashboard">
+                                <LoginPage />
+                            </UnauthenticatedGuard>
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/dashboard"
+                        element={
+                            <AuthenticatedGuard redirectTo="/">
+                                <DashboardPage />
+                            </AuthenticatedGuard>
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/inspection"
+                        element={
+                            <AuthenticatedGuard redirectTo="/">
+                                <InspectionPage />
+                            </AuthenticatedGuard>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={<Navigate replace to="/login" />}
+                    />
+                    <Route
+                        path="*"
+                        element={<Navigate replace to="/login" />}
+                    />
+                </Routes>
+            </main>
+        </BrowserRouter>
     );
 }
 
@@ -45,6 +63,8 @@ const root = createRoot(container);
 
 root.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={<Loader />} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>
 );
