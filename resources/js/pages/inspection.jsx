@@ -1,7 +1,6 @@
-import { Suspense, useEffect, useState } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import {
     useGetComponentTypesQuery,
     useGetComponentsQuery,
@@ -21,6 +20,15 @@ import Table from "../components/table";
 import TableHeader from "../components/table-header";
 import TableBody from "../components/table-body";
 import NumberDisplay from "../components/number-display";
+
+function WindTurbineModel() {
+    const gltf = useGLTF("/assets/wind_turbine/scene.gltf");
+    return (
+        <mesh scale={[0.3, 0.3, 0.3]}>
+            <primitive object={gltf.scene} position={[0, -10, 0]} />
+        </mesh>
+    );
+}
 
 export default function InspectionPage() {
     const [searchParams] = useSearchParams();
@@ -143,8 +151,6 @@ export default function InspectionPage() {
         setFilteredTurbineData(filteredTurbines);
     };
 
-    const gltf = useLoader(GLTFLoader, "./assets/wind_turbine/scene.gltf");
-
     if (
         isFarmTurbinesLoading ||
         isComponentsLoading ||
@@ -238,14 +244,7 @@ export default function InspectionPage() {
                     />
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[2, 5, 2]} intensity={1} />
-                    <Suspense fallback={<Loader />}>
-                        <mesh scale={[0.3, 0.3, 0.3]}>
-                            <primitive
-                                object={gltf.scene}
-                                position={[0, -10, 0]}
-                            />
-                        </mesh>
-                    </Suspense>
+                    <WindTurbineModel />
                 </Canvas>
             </Card>
         </div>
