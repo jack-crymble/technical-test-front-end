@@ -4,6 +4,7 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import {
     useGetComponentTypesQuery,
     useGetComponentsQuery,
+    useGetFarmQuery,
     useGetFarmTurbinesQuery,
     useGetGradeTypesQuery,
     useGetGradesQuery,
@@ -34,6 +35,8 @@ export default function InspectionPage() {
     const [searchParams] = useSearchParams();
 
     const farmId = searchParams.get("farmId") ?? 1;
+
+    const { data: farm } = useGetFarmQuery(farmId);
 
     const {
         data: turbines,
@@ -75,18 +78,21 @@ export default function InspectionPage() {
     const [filteredTurbineData, setFilteredTurbineData] = useState([]);
 
     useEffect(() => {
-        if (isGradesLoading) return;
-        if (isGradeTypesLoading) return;
-        if (isComponentsLoading) return;
-        if (isComponentTypesLoading) return;
-        if (isInspectionsLoading) return;
-        if (isFarmTurbinesLoading) return;
-        if (isGradesError) return;
-        if (isGradeTypesError) return;
-        if (isComponentsError) return;
-        if (isComponentTypesError) return;
-        if (isInspectionsError) return;
-        if (isFarmTurbinesError) return;
+        if (
+            isGradesLoading ||
+            isGradeTypesLoading ||
+            isComponentsLoading ||
+            isComponentTypesLoading ||
+            isInspectionsLoading ||
+            isFarmTurbinesLoading ||
+            isGradesError ||
+            isGradeTypesError ||
+            isComponentsError ||
+            isComponentTypesError ||
+            isInspectionsError ||
+            isFarmTurbinesError
+        )
+            return;
 
         let updatedGrades = grades.map((grade) => ({
             grade_id: grade.id,
@@ -177,7 +183,7 @@ export default function InspectionPage() {
         <div className="grid grid-cols-5 gap-4 h-full">
             <h2 className="flex gap-2 items-center text-xl tracking-widest col-span-5">
                 <FontAwesomeIcon icon={faCow} />
-                <span>Farm: {farmId}</span>
+                <span>Farm: {farm.name}</span>
             </h2>
             <div className="flex flex-col gap-4 col-span-3 overflow-hidden">
                 <div className="grid grid-cols-9 gap-4">

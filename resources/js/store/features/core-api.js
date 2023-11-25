@@ -6,6 +6,10 @@ export const coreApi = createApi({
         baseUrl: "http://localhost/api", // TODO: Put me in the env
     }),
     endpoints: (builder) => ({
+        getFarm: builder.query({
+            query: (farmId) => `/farms/${farmId}`,
+            transformResponse: (response) => response.data,
+        }),
         getFarms: builder.query({
             query: () => `/farms`,
             transformResponse: (response) => response.data,
@@ -42,6 +46,7 @@ export const coreApi = createApi({
 });
 
 export const {
+    useGetFarmQuery,
     useGetFarmsQuery,
     useGetFarmTurbinesQuery,
     useGetTurbinesQuery,
