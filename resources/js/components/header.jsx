@@ -15,7 +15,7 @@ export default function Header() {
 
     const handleNavigation = (navigateTo) => navigate(navigateTo);
 
-    const handleUser = () => {
+    const toggleUserDropdown = () => {
         setDropdown(!userDropdownOpen);
     };
 
@@ -40,7 +40,7 @@ export default function Header() {
                 className={`${
                     !authenticated && "invisible"
                 } rounded-xl p-4 text-xl bg-secondary text-primary hover:bg-primary hover:text-secondary`}
-                onClick={handleUser}
+                onClick={toggleUserDropdown}
                 data-dropdown-toggle="dropdown"
             >
                 <FontAwesomeIcon icon={faUser} />

@@ -4,7 +4,7 @@ export default function Dropdown({ label, options = [], onChange = () => {} }) {
             <label htmlFor="dropdown">{label}</label>
 
             <select
-                className=" bg-primary text-secondary p-2 rounded-lg text-center"
+                className=" p-2 rounded-lg text-center bg-primary text-secondary"
                 name="dropdown"
                 onChange={(event) => onChange(event.target.value)}
             >

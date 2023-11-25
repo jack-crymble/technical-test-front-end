@@ -5,7 +5,7 @@ export default function Button({
 }) {
     return (
         <button
-            className={`${className}  text-primary px-8 py-2 rounded-2xl hover:text-background hover:bg-primary border-primary border-2`}
+            className={`${className}  px-8 py-2 rounded-xl border-2 text-primary hover:text-background hover:bg-primary border-primary`}
             onClick={onClick}
             type="button"
         >
