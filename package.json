@@ -50,9 +50,13 @@
     },
     "jest": {
         "testEnvironment": "jsdom",
+        "collectCoverage": true,
+        "coverageReporters": [
+            "json",
+            "html"
+        ],
         "collectCoverageFrom": [
-            "src/**/*.{js,jsx,ts,tsx}",
-            "!src/**/*.d.ts"
+            "resources/js/**/*.{js,jsx}"
         ]
     }
 }
