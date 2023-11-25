@@ -27,6 +27,7 @@ export default function Header() {
             >
                 <FontAwesomeIcon icon={faHome} />
             </button>
+
             <h1
                 className="flex gap-2 items-center text-3xl tracking-widest cursor-pointer text-text"
                 onClick={() => handleNavigation("/dashboard")}
@@ -34,8 +35,11 @@ export default function Header() {
                 <span>WindWise</span>
                 <FontAwesomeIcon icon={faWind} />
             </h1>
+
             <button
-                className="rounded-xl p-4 text-xl bg-secondary text-primary hover:bg-primary hover:text-secondary"
+                className={`${
+                    !authenticated && "invisible"
+                } rounded-xl p-4 text-xl bg-secondary text-primary hover:bg-primary hover:text-secondary`}
                 onClick={handleUser}
                 data-dropdown-toggle="dropdown"
             >
@@ -49,21 +53,12 @@ export default function Header() {
                             className="py-2 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDefaultButton"
                         >
-                            {authenticated ? (
-                                <li
-                                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    onClick={() => dispatch(logout())}
-                                >
-                                    Log Out
-                                </li>
-                            ) : (
-                                <li
-                                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    onClick={() => navigate("/login")}
-                                >
-                                    Log In
-                                </li>
-                            )}
+                            <li
+                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                onClick={() => dispatch(logout())}
+                            >
+                                Log Out
+                            </li>
                         </ul>
                     </div>
                 )}
