@@ -25,6 +25,23 @@ describe("NumberDisplay", () => {
             expect(getByText("Test Avg")).toBeInTheDocument();
             expect(getByText("3")).toBeInTheDocument();
         });
+
+        it("should set aggregate to avg when no aggregate prop provided", () => {
+            const { getByText } = render(
+                <NumberDisplay title="Test Avg" values={mockValues} />
+            );
+
+            expect(aggregateUtils.average).toHaveBeenCalledWith(mockValues);
+
+            expect(getByText("Test Avg")).toBeInTheDocument();
+            expect(getByText("3")).toBeInTheDocument();
+        });
+
+        it("should set values to [] when no values prop provided", () => {
+            render(<NumberDisplay title="Test Avg" aggregate="avg" />);
+
+            expect(aggregateUtils.average).toHaveBeenCalledWith([]);
+        });
     });
 
     describe("Sum", () => {
