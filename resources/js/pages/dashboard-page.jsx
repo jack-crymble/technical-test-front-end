@@ -21,6 +21,10 @@ import TableHeader from "../components/table-header";
 import TableBody from "../components/table-body";
 
 export default function DashboardPage() {
+    const [activeFarm, setActiveFarm] = useState();
+
+    const navigate = useNavigate();
+
     const {
         data: farms,
         isError: isFarmsError,
@@ -32,10 +36,6 @@ export default function DashboardPage() {
         isError: isTurbinesError,
         isLoading: isTurbinesLoading,
     } = useGetTurbinesQuery();
-
-    const [activeFarm, setActiveFarm] = useState();
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (farms === undefined || farms.length === 0) return;

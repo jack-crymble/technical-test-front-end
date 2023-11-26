@@ -32,8 +32,10 @@ function WindTurbineModel() {
 }
 
 export default function InspectionPage() {
-    const [searchParams] = useSearchParams();
+    const [turbineData, setTurbineData] = useState([]);
+    const [filteredTurbineData, setFilteredTurbineData] = useState([]);
 
+    const [searchParams] = useSearchParams();
     const farmId = searchParams.get("farmId") ?? 1;
 
     const { data: farm } = useGetFarmQuery(farmId);
@@ -73,9 +75,6 @@ export default function InspectionPage() {
         isError: isComponentsError,
         isLoading: isComponentsLoading,
     } = useGetComponentsQuery();
-
-    const [turbineData, setTurbineData] = useState([]);
-    const [filteredTurbineData, setFilteredTurbineData] = useState([]);
 
     useEffect(() => {
         if (

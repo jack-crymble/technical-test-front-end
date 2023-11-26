@@ -1,15 +1,15 @@
 import { createRoot } from "react-dom/client";
 import Header from "./components/header";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import InspectionPage from "./pages/inspection";
-import DashboardPage from "./pages/dashboard";
 import { Provider } from "react-redux";
-import LoginPage from "./pages/login";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import InspectionPage from "./pages/inspection-page";
+import DashboardPage from "./pages/dashboard-page";
+import LoginPage from "./pages/login-page";
 import Loader from "./components/loader";
-import AuthenticatedGuard from "./guards/authenticated.guard";
-import UnauthenticatedGuard from "./guards/unauthenticated.guard";
+import AuthenticatedGuard from "./guards/authenticated-guard";
+import UnauthenticatedGuard from "./guards/unauthenticated-guard";
 
 export default function App() {
     return (

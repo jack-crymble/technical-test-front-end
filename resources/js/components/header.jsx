@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../store/features/auth-slice";
 
 export default function Header() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const [userDropdownOpen, setDropdown] = useState(false);
 
+    const dispatch = useDispatch();
     const authenticated = useSelector((state) => state.auth.authenticated);
 
-    const [userDropdownOpen, setDropdown] = useState(false);
+    const navigate = useNavigate();
 
     const handleNavigation = (navigateTo) => navigate(navigateTo);
 

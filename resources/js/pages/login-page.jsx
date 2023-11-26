@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/features/auth-slice";
 
 export default function LoginPage() {
-    const dispatch = useDispatch();
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
 
     const handleLogin = () => {
         dispatch(
