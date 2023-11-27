@@ -106,3 +106,13 @@ This is a place for you to add your notes, plans, thinking and any feedback you 
 -   Link above for installing php directs you to php 8.1 which does not work. It depends on ubuntu resources which have been removed - `The repository 'http://ports.ubuntu.com/ubuntu-ports impish Release' does not have a Release file.` To resolve this, instead use php 8.2 and install its dependencies.
 -   The use of less random coordinates for turbine location would have been nice. As well as including location data for each of the farms.
 -   The curent login functionality does not reach out to any API (as none are defined in the provided back end) so instead it aids in the use of route guards preventing users who have not logged in from accessing both the `/dashboard` and `/inspection` routes. Any username and password combination will work.
+
+### Future steps
+
+These are a few things I would like to add to the app in the future:
+
+-   Login functionality integrated with BE authentication logic
+-   Dashboard Page: Hovering over a row in the table will highlight a marker on the map. The marker will also show some more information about the specific turbine on click.
+-   Inspection Page: Displaying a rotating circle of the 5 turbines, each in different states of health depending on the grade they've been given. The grade for each component would be clearly visible on the turbine and interaction with that component would show a history of inspections to show the degradation of the component over time.
+-   Map Component: Dynamically zoom the map to contain each of the displayed turbines.
+-   Offer an immersive 3D view option for inspecting each of the turbines components where the user can view 3d models of the specific turbine inspected. This will give them a more accurate understanding of what needs to be fixed on that component
